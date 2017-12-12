@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Test WordFilter</p>
+<p id="log"></p>
+
+<script src="./wordfilter.js" type="text/javascript"></script>
+<script type="text/javascript">
+    let filter = new WordFilter()
+
+    let dirtywords = ["abc", "abcde"]
+    filter.addWord("tmd")
+    filter.addWord("xxx")
+    filter.addWords(dirtywords)
+    let s = "abcyyabcdefghixxxzzztmdyyyxxx"
+    let ret = filter.maskString(s)
+    let loop = 10000
+    let t1 = (new Date()).getTime()/1000
+    for (let i=1; i<loop; i++) {
+        ret = filter.maskString(s)
+    }
+    let t2 = (new Date()).getTime()/1000
+
+    let log = `${loop} times maskString("${s}" -> "${ret}"), time used: ${t2-t1} seconds`
+    document.getElementById("log").innerHTML = log
+</script>
+</body>
+</html>
